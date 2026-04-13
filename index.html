@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- 補上這行，手機版才會生效 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <style>
+    /* 預設樣式（電腦版） */
+    body {
+      background-color: rgb(150, 150, 150);
+      font-size: 24px;
+    }
+    .desktop-only { display: block; }
+    .mobile-only { display: none; }
+      /* 按鈕的基礎樣式 */
+      /* 容器樣式 */
+  .interest-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-top: 20px;
+  }
+
+  /* 按鈕樣式 */
+  .drop-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 24px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* 預設隱藏清單 */
+  .interest-list {
+    display: none; /* 關鍵：平常看不到 */
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px;
+    list-style: none; /* 移除圓點 */
+    border-radius: 5px;
+    text-align: left;
+    z-index: 1;
+  }
+
+  /* 列表中的每一項 */
+  .interest-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+  }
+
+  /* 滑鼠移到容器時，顯示清單 */
+  .interest-dropdown:hover .interest-list {
+    display: block; /* 變為顯示 */
+  }
+
+  /* 滑鼠移到按鈕變色 */
+  .drop-btn:hover {
+    background-color: #45a049;
+  }
+
+
+  /* 滑鼠移上去變色 */
+  .my-btn:hover {
+    background-color: #555;
+    transform: scale(1.1); /* 稍微放大 */
+  }
+
+
+    /* 手機版樣式：當螢幕寬度小於 768px 時觸發 */
+    @media screen and (max-width: 768px) {
+      body {
+        background-color: lightcoral;
+        font-size: 18px;
+      }
+      .desktop-only { display: none; }
+      .mobile-only { display: block; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>11327100 測試網站</h1>
+
+  <!-- RWD 提示字 (你之前的優點，保留它) -->
+  <p class="desktop-only" style="color: rgb(56, 56, 56);">💻 目前偵測為：電腦版</p>
+  <p class="mobile-only" style="color: red;">📱 目前偵測為：手機版</p>
+
+  <hr>
+
+  <!-- 選單按鈕區 -->
+  <div style="margin: 20px 0;">
+    <button class="drop-btn" onclick="showContent('bio')">看個人簡介</button>
+    <button class="drop-btn" onclick="showContent('hobbies')" style="background-color: #2196F3;">看興趣專長</button>
+  </div>
+
+<!-- 內容區 1：個人簡介 -->
+<div id="bio-section" style="display: block; background: rgba(255,255,255,0.5); padding: 20px; border-radius: 10px;">
+  <h2>👤 個人簡介</h2>
+  
+  <!-- 電腦看到的內容 -->
+  <div class="desktop-only">
+    <p><strong>電腦版資訊：</strong></p>
+    <p>學號：11327100</p>
+    <p>班級：資工 2-B </p>
+    <p>這是使用大型螢幕瀏覽的專屬介面。</p>
+  </div>
+
+  <!-- 手機看到的內容 -->
+  <div class="mobile-only">
+    <p><strong>手機版資訊：</strong></p>
+    <p>11327100 | 資工2-B</p>
+    <p>📱 目前使用行動裝置瀏覽。</p>
+  </div>
+</div>
+
+<!-- 內容區 2：興趣專長 -->
+<!-- 內容區 2：興趣專長 (預設隱藏) -->
+<div id="hobbies-section" style="display: none; background: rgba(255,255,255,0.5); padding: 20px; border-radius: 10px;">
+  <h2>🎨 興趣專長</h2>
+
+  <!-- 電腦看到的內容 -->
+  <div class="desktop-only">
+    <ul>
+      <li>跟 AI 聊天 (AI們是好老師)</li>
+      <li>玩策略遊戲</li>
+      <li>用AI畫ㄉ圖 (電腦版展示大圖) ╰(*°▽°*)╯</li>
+    </ul>
+    <!-- 電腦版圖片：設定寬度為 500px -->
+    <img src="media_1776078374.png" 
+         alt="AI Drawing Desktop" 
+         style="width: 500px; border-radius: 10px; border: 2px solid #555;">
+  </div>
+
+  <!-- 手機看到的內容 -->
+  <div class="mobile-only">
+    <ul>
+      <li>跟AI聊天</li>
+      <li>玩策略遊戲</li>
+      <li>用AI畫ㄉ圖</li>
+    </ul>
+    <!-- 手機版圖片：設定寬度為 100% (隨著螢幕縮放) -->
+    <img src="media_1775988820.png" 
+         alt="AI Drawing Mobile" 
+         style="width: 100%; max-width: 300px; border-radius: 10px;">
+  </div>
+</div>
+
+
+  <!-- 關鍵的 JavaScript (確保放在 body 最下面) -->
+  <script>
+    function showContent(type) {
+      // 抓取兩個區塊
+      const bio = document.getElementById('bio-section');
+      const hobbies = document.getElementById('hobbies-section');
+
+      if (type === 'bio') {
+        bio.style.display = 'block';    // 顯示簡介
+        hobbies.style.display = 'none'; // 隱藏興趣
+      } else {
+        bio.style.display = 'none';     // 隱藏簡介
+        hobbies.style.display = 'block';// 顯示興趣
+      }
+    }
+  </script>
+
+</body>
+</html>
